@@ -1,4 +1,4 @@
-FROM debian:wheezy
+FROM ubuntu:14.04
 
 MAINTAINER Anastas Dancha <anapsix@random.io>
 
