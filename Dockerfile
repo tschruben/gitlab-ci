@@ -9,10 +9,12 @@ RUN gem install bundle --no-ri --no-rdoc
 RUN adduser --disabled-login --gecos 'GitLab CI' gitlab_ci
 RUN usermod -a -G crontab gitlab_ci
 
-RUN cd /home/gitlab_ci; sudo -u gitlab_ci -H git config --local user.email "gitlab_ci@localhost"
-RUN cd /home/gitlab_ci; sudo -u gitlab_ci -H git config --local user.name "GitLab CI"
 RUN cd /home/gitlab_ci; sudo -u gitlab_ci -H git clone -b 5-0-stable --depth 1 https://github.com/gitlabhq/gitlab-ci.git gitlab-ci
 RUN cd /home/gitlab_ci/gitlab-ci; sudo -u gitlab_ci -H mkdir -p tmp/pids tmp/sockets log
+
+#Add user info
+RUN cd /home/gitlab_ci; sudo -u gitlab_ci -H git config --local user.email "gitlab_ci@localhost"
+RUN cd /home/gitlab_ci; sudo -u gitlab_ci -H git config --local user.name "GitLab CI"
 
 # add and patch to support SQLITE3
 ADD ./BUNDLER-adding-sqlite3-support.patch /home/gitlab_ci/gitlab-ci/BUNDLER-adding-sqlite3-support.patch
