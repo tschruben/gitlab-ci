@@ -7,8 +7,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes libxml2-dev li
 RUN gem install bundle --no-ri --no-rdoc
 
 RUN adduser --disabled-login --gecos 'GitLab CI' gitlab_ci
-RUN git --local user.email "gitlab_ci@localhost"
-RUN git --local user.name "GitLab CI"
+RUN git config --local user.email "gitlab_ci@localhost"
+RUN git config --local user.name "GitLab CI"
 RUN usermod -a -G crontab gitlab_ci
 
 RUN cd /home/gitlab_ci; sudo -u gitlab_ci -H git clone -b 5-0-stable --depth 1 https://github.com/gitlabhq/gitlab-ci.git gitlab-ci
